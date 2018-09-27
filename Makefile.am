@@ -15,7 +15,23 @@ dist_man_MANS	= minerd.1
 
 minerd_SOURCES	= elist.h miner.h compat.h \
 		  cpu-miner.c util.c \
-		  sha2.c scrypt.c
+		  sha2.c scrypt.c x11.c \
+  		  sha3/sph_keccak.c \
+  		  sha3/sph_hefty1.c \
+  		  sha3/sph_groestl.c \
+  		  sha3/sph_skein.c \
+  		  sha3/sph_bmw.c \
+ 		  sha3/sph_jh.c \
+  		  sha3/sph_shavite.c \
+  		  sha3/sph_blake.c \
+		  sha3/sph_luffa.c \
+  		  sha3/sph_cubehash.c \
+ 		  sha3/sph_simd.c \
+ 		  sha3/sph_echo.c \
+  		  sha3/sph_hamsi.c \
+		  sha3/sph_fugue.c \
+  		  sha3/sph_shabal.c \
+  		  sha3/sph_whirlpool.c
 if USE_ASM
 if ARCH_x86
 minerd_SOURCES += sha2-x86.S scrypt-x86.S

@@ -3,13 +3,16 @@ fork of Jeff Garzik's reference cpuminer.
 
 License: GPLv2.  See COPYING for details.
 
-Downloads:  https://sourceforge.net/projects/cpuminer/files/
-Git tree:   https://github.com/pooler/cpuminer
+Git tree:   https://github.com/yerihan917/yrhcpuminer
 
 Dependencies:
 	libcurl			http://curl.haxx.se/libcurl/
 	jansson			http://www.digip.org/jansson/
 		(jansson is included in-tree)
+
+	(On ubuntu command)
+	apt-get update
+	apt-get install -y automake libcurl4-openssl-dev git make
 
 Basic *nix build instructions:
 	./autogen.sh	# only needed if building from git repo

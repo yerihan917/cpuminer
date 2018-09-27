@@ -103,11 +103,13 @@ struct workio_cmd {
 enum algos {
 	ALGO_SCRYPT,		/* scrypt(1024,1,1) */
 	ALGO_SHA256D,		/* SHA-256d */
+	ALGO_X11,		/* X11-HASH */
 };
 
 static const char *algo_names[] = {
 	[ALGO_SCRYPT]		= "scrypt",
 	[ALGO_SHA256D]		= "sha256d",
+	[ALGO_X11]		= "X11",
 };
 
 bool opt_debug = false;
@@ -172,6 +174,7 @@ Options:\n\
                           scrypt    scrypt(1024, 1, 1) (default)\n\
                           scrypt:N  scrypt(N, 1, 1)\n\
                           sha256d   SHA-256d\n\
+			  X11       X11-HASH\n\
   -o, --url=URL         URL of mining server\n\
   -O, --userpass=U:P    username:password pair for mining server\n\
   -u, --user=USERNAME   username for mining server\n\
@@ -1197,6 +1200,9 @@ static void *miner_thread(void *userdata)
 			case ALGO_SHA256D:
 				max64 = 0x1fffff;
 				break;
+			case ALGO_X11:
+				max64 = 0x1fffffLL;
+				break;
 			}
 		}
 		if (work.data[19] + max64 > end_nonce)
@@ -1216,6 +1222,11 @@ static void *miner_thread(void *userdata)
 
 		case ALGO_SHA256D:
 			rc = scanhash_sha256d(thr_id, work.data, work.target,
+			                      max_nonce, &hashes_done);
+			break;
+
+		case ALGO_X11:
+			rc = scanhash_x11(thr_id, work.data, work.target,
 			                      max_nonce, &hashes_done);
 			break;
 
